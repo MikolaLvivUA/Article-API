@@ -9,7 +9,11 @@
     "start": "rimraf dist && npm run tslint && tsc-watch --outDir ./dist --onSuccess \"npm run app:start\" --onFailure \"'echo Compilation Failed'\"",
     "build": "rimraf dist && tsc",
     "tsc": "rimraf dist && npm run tslint && tsc --watch",
-    "tslint": "tslint -c tslint.json 'src/**/*.ts' --fix"
+    "tslint": "tslint -c tslint.json 'src/**/*.ts' --fix",
+    "migrate:up": "npm run build && npx sequelize-cli db:migrate",
+    "migrate:down": "npm run build && npx sequelize-cli db:migrate:undo",
+    "create:db": "node_modules/.bin/sequelize db:create",
+    "first": "sequelize db:create && npx sequelize-cli db:migrate"
   },
   "repository": {
     "type": "git",
@@ -21,6 +25,7 @@
     "express": "^4.17.1",
     "dotenv": "^8.2.0",
     "sequelize": "^5.21.3",
+    "sequelize-cli": "^5.5.1",
     "mysql2": "^2.1.0",
     "joi": "^14.3.1"
   },
