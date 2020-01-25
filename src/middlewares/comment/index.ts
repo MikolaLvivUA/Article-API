@@ -1,1 +1,1 @@
-export * from './comment.middleware';
+export * from './isCommentPresent.middleware';
