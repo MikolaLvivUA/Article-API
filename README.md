@@ -8,12 +8,17 @@ $ cd ../Article-API
 $ npm install
 $ npm run start
 ```
-##HOW TO USE
+### CREATE DATABASE
+```
+$ npm run first
+```
 
-#### CREATE ARTICLE
+## HOW TO USE
 
+#### CREATE ARTICLE'
+```
 POST: http://localhost:3000/articles
-
+```
 InsertDataExample(in body):  
 ```
 {
@@ -25,8 +30,9 @@ InsertDataExample(in body):
 title and text have to be a string.
 
 #### GET ALL ARTICLES
-
+```
 GET: http://localhost:3000/articles
+```
 
 ReturnExample:
 ```
@@ -49,8 +55,9 @@ ReturnExample:
 ```
 
 #### GET ARTICLE BY ID
-
+```
 GET: http://localhost:3000/articles/:article_id
+```
 
 ReturnExample:
 ```
@@ -64,8 +71,9 @@ ReturnExample:
 }
 ```
 #### UPDATE ARTICLE
-
+```
 PATCH: http://localhost:3000/articles/:article_id
+```
 
 UpdateDataExample:
 ```
@@ -88,13 +96,16 @@ ReturnExample:
 ```
 
 #### DELETE ARTICLE
+```
 DELETE: http://localhost:3000/articles/:article_id
+```
 
 #### GET ALL ARTICLES COMMENTS
 
+```
 GET: http://localhost:3000/articles/:article_id/comments
+```
 
-Getting all Article Comments
 
 ReturnExample:
 
@@ -119,9 +130,9 @@ ReturnExample:
 }
 ```
 #### CREATE NEW COMMENT
-
+```
 POST: http://localhost:3000/articles/article_id/comments
-
+```
 InsertDataExample(in body):
 
 ```
@@ -132,9 +143,9 @@ InsertDataExample(in body):
 ```
 
 #### GET COMMENT BY ID
-
+```
 GET: http://localhost:3000/comments/comment_id
-
+```
 ReturnExample:
 
 ```
@@ -149,9 +160,9 @@ ReturnExample:
 }
 ```
 #### UPDATE COMMENT BY ID
-
+```
 PATCH: http://localhost:3000/comments/comment_id
-
+```
 UpdateDataExample:
 
 ```
@@ -176,5 +187,6 @@ ReturnExample:
 }
 ```
 #### DELETE COMMENT BY ID
-
+```
 DELETE: http://localhost:3000/comments/comment_id
+```
