@@ -5,37 +5,34 @@ import { ResponseStatusCodesEnum } from '../../constants';
 import { ErrorHandler } from '../../errors';
 import { articleService } from '../../services';
 import { CreateArticleValidator, UpdateArticleValidator } from '../../validators';
-import { IArticle, IRequestExtended } from '../../Interfaces';
+import { IArticleInputData } from '../../Interfaces';
 
 class ArticleController {
 
-    async createArticle(req: Request, res: Response, next: NextFunction) {
+    async createArticle(articleInput: IArticleInputData, req: Request) {
 
-        const newArticleData = req.body as Partial<IArticle>;
+        const article = articleInput && articleInput.articleInputData;
 
-        const newArticleValidity = Joi.validate(newArticleData, CreateArticleValidator);
+        const newArticleValidity = Joi.validate(article, CreateArticleValidator);
 
         if (newArticleValidity.error) {
-            return next(new ErrorHandler(ResponseStatusCodesEnum.BAD_REQUEST, newArticleValidity.error.details[0].message));
+            throw new ErrorHandler(ResponseStatusCodesEnum.BAD_REQUEST, newArticleValidity.error.details[0].message);
         }
 
-        await articleService.createArticle(newArticleData);
+        await articleService.createArticle(article);
 
-        res.status(ResponseStatusCodesEnum.CREATED).end();
+        return true;
     }
 
-    async getAllArticles(req: Request, res: Response) {
-
-        const articleList = await articleService.getAllArticles();
-
-        res.json({data: articleList});
+     getAllArticles() {
+        return articleService.getAllArticles();
     }
 
-    async getArticlesByID(req: IRequestExtended, res: Response) {
+    async getArticlesByID(id: number) {
 
-        const article = req.article;
+        const article_id = Object.values(id);
 
-        res.json({data: article});
+        return await articleService.getArticleById(article_id);
     }
 
     async updateArticle(req: Request, res: Response, next: NextFunction) {

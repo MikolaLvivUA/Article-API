@@ -7,12 +7,12 @@ class ArticleService {
         return ArticleDBModel.create(createObject) as any;
     }
 
-    getAllArticles(): Promise<IArticle> {
+    getAllArticles(): Promise<IArticle[]> {
         return ArticleDBModel.findAll() as any;
     }
 
-    getArticleById(article_id: number): Promise<IArticle> {
-        return ArticleDBModel.findByPk(article_id) as any;
+    getArticleById(id: any): Promise<IArticle> {
+        return ArticleDBModel.findByPk(...id) as any;
     }
 
     updateArticle(article_id: number, updateObject: Partial<IArticle>): Promise<IArticle> {

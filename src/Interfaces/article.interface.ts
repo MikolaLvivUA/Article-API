@@ -4,3 +4,7 @@ export interface IArticle {
     text: string;
     createdDate?: string;
 }
+
+export interface IArticleInputData {
+    articleInputData: IArticle;
+}

@@ -1,10 +1,11 @@
 import * as express from 'express';
+import * as graphqlHTTP from 'express-graphql';
 import { resolve as resolvePath } from 'path';
 
 import { NextFunction, Request, Response } from 'express';
 import { ResponseStatusCodesEnum } from './constants';
-
-import { articleRouter, commentRouter, notFoundRouter } from './routes';
+import { graphQLResolvers, graphQLRootSchema } from './graphql';
+import { notFoundRouter } from './routers';
 
 class App {
     public readonly app: express.Application = express();
@@ -22,8 +23,11 @@ class App {
     }
 
     private mountRoutes(): void {
-        this.app.use('/articles', articleRouter);
-        this.app.use('/comments', commentRouter);
+        this.app.use('/graphql', graphqlHTTP({
+            schema: graphQLRootSchema,
+            rootValue: graphQLResolvers,
+            graphiql: true
+        }));
         this.app.use('*', notFoundRouter);
     }
 
